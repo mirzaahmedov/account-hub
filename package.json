@@ -1,0 +1,38 @@
+{
+  "name": "user-management-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch src/index.ts",
+    "build": "tsup src/index.ts",
+    "start": "node dist/index.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.9.2",
+    "jsonwebtoken": "^9.0.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.10.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "handlebars": "^4.7.9",
+    "http-status-codes": "^2.3.0",
+    "knex": "^3.2.10",
+    "mailtrap": "^4.6.0",
+    "zod": "^4.4.3"
+  }
+}
