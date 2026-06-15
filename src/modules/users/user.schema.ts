@@ -1,9 +1,9 @@
 import z from "zod";
 
 export const UserCreateSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().nonempty(),
   email: z.email(),
-  password: z.string().min(6),
+  password: z.string().nonempty(),
 });
 
 export const UserLoginSchema = z.object({
@@ -14,6 +14,6 @@ export const UserLoginSchema = z.object({
 export const UserUpdateSchema = z.object({
   name: z.string().min(1).optional(),
   email: z.email().optional(),
-  password: z.string().min(6).optional(),
+  password: z.string().optional(),
   status: z.enum(["unverified", "blocked", "active"]).optional(),
 });
