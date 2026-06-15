@@ -44,7 +44,7 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
       access_token: accessToken,
     });
 
-    EmailService.sendVerificationEmail(user.email, verificationToken).catch(() => {});
+    await EmailService.sendVerificationEmail(user.email, verificationToken).catch(() => {});
   } catch (error) {
     next(error);
   }

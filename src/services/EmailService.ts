@@ -26,8 +26,10 @@ export class EmailService {
         text: `Verify your email: ${verifyUrl}`,
         html: html,
       });
+      console.log(`Email sent successfully to ${email}`);
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 }
