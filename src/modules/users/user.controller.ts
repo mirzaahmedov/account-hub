@@ -127,10 +127,20 @@ export async function sendVerificationEmail(req: Request, res: Response, next: N
       return;
     }
 
+    if (user.is_email_verified) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        message: "User already verified",
+      });
+      return;
+    }
+
     const verificationToken = crypto.randomUUID();
     const verificationExpiresAt = new Date(Date.now() + 1000 * 60 * 10);
 
-    await userRepository.update(userId, { verification_token: verificationToken, verification_expires_at: verificationExpiresAt.toISOString() });
+    await userRepository.update(userId, {
+      verification_token: verificationToken,
+      verification_expires_at: verificationExpiresAt.toISOString(),
+    });
 
     await EmailService.sendVerificationEmail(user.email, verificationToken);
 
@@ -154,6 +164,10 @@ export async function verifyEmail(req: Request, res: Response, next: NextFunctio
     if (!user) {
       res.status(StatusCodes.NOT_FOUND).json({ message: "Invalid or expired token" });
       return;
+    }
+
+    if (user.status === "blocked") {
+      res.status(StatusCodes.FORBIDDEN).json({ message: "User is blocked" });
     }
 
     if (user.verification_expires_at && new Date(user.verification_expires_at) < new Date()) {
